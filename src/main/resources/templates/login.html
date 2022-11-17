@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/login.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="js/seletor.js"></script>
+        <title>IRM Login</title>
+    </head>
+    <body>
+        <div id="fundo">
+            <div id="box">
+                <div id="logoIRM">
+                    <img src="img/logo.svg" alt="LogoIRM">
+                </div>
+                <div id="titulo">
+                    <h1>Entrar</h1>
+                </div>
+                <section id="seletor">
+                    <button id="btpaciente" class="ativo">
+                        <div id="paciente">
+                            <h2>Paciente</h2>
+                        </div>
+                    </button>
+                    <button id="btfuncionario">
+                        <div id="funcionario">
+                            <h2>Funcionario</h2>
+                        </div>
+                    </button>
+                </section>
+                <section id="forms">
+                    <input type="text" placeholder="CPF:" class="campos" maxlength="11">
+                    <input type="password" placeholder="SENHA:" class="campos">
+                    <div id="check">
+                        <input type="checkbox">
+                        <span>Mantenha-me conectado</span>
+                    </div>
+                </section>
+                <section id="botao">
+                    <a href="inicio.html"><input type="button" value="Acessar" id="botaolog"></a>
+                </section>
+
+            </div>
+        </div>
+    </body>
+</html>
