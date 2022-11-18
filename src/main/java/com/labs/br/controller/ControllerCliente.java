@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.labs.br.entity.Cliente;
 import com.labs.br.repository.ClienteRepository;
 
+import java.util.List;
+
 @Controller
 public class ControllerCliente {
 
@@ -46,7 +48,7 @@ public class ControllerCliente {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid person Id:" + id));
 
         model.addAttribute("cliente", cliente);
-        return "atualizaForm";
+        return "atualizacaodecliente";
     }
 
     // Atualiza funcionario
@@ -70,4 +72,14 @@ public class ControllerCliente {
         clienteRepository.delete(cliente);
         return "redirect:/inicio";
     }
+
+    @GetMapping("/clientes")
+    public String historicoClientes(Model model) {
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        model.addAttribute("clientes", clientes);
+
+        return "historicodocliente";
+    }
+
 }

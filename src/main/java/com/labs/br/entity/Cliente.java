@@ -5,18 +5,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Setter @Getter @NoArgsConstructor @AllArgsConstructor
 public class Cliente {
 
-    public Cliente(String cpf, String nome, int rg, String uf_rg, String orgao_emissor, Date data_nascimento, String genero, String email, int telefone, int telefone_secundario, int cep, String logradouro, int numero, String complemento, String bairro, String municipio, String uf) {
+    public Cliente(String cpf, String nome, String rg, String uf_rg, String orgao_emissor, LocalDate data_nascimento, String genero, String email, String telefone, String telefone_secundario, String cep, String logradouro, String numero, String complemento, String bairro, String municipio, String uf) {
         this.cpf = cpf;
         this.nome = nome;
         this.rg = rg;
@@ -42,17 +44,18 @@ public class Cliente {
 
     private String cpf;
     private String nome;
-    private int rg;
+    private String rg;
     private String uf_rg;
     private String orgao_emissor;
-    private Date data_nascimento;
+
+    private LocalDate data_nascimento;
     private String genero;
     private String email;
-    private int telefone;
-    private int telefone_secundario;
-    private int cep;
+    private String telefone;
+    private String telefone_secundario;
+    private String cep;
     private String logradouro;
-    private int numero;
+    private String numero;
     private String complemento;
     private String bairro;
     private String municipio;
