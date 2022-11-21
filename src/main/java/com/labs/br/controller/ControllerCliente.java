@@ -1,6 +1,5 @@
 package com.labs.br.controller;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.labs.br.entity.Cliente;
 import com.labs.br.repository.ClienteRepository;
 
+import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -21,28 +22,30 @@ public class ControllerCliente {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @GetMapping("/form")
-    public String pessoasForm(Cliente cliente) {
+    @GetMapping("/formularioclientes")
+    public String criarCliente(Cliente cliente) {
 
         return "cadastrodeclientes";
     }
 
-    @PostMapping("/add")
-    public String novo(@Valid Cliente cliente, BindingResult result) {
+    @PostMapping("/createcliente")
+    public String createCliente(@Valid Cliente cliente, BindingResult result) {
 
         System.out.println(cliente.getClass());
 
         if (result.hasFieldErrors()) {
-            return "redirect:/form";
+            return "redirect:/formularioclientes";
         }
+
+        cliente.setUltimaalteracao(new Date());
 
         clienteRepository.save(cliente);
 
-        return "redirect:/inicio";
+        return "redirect:/historicoclientes";
     }
 
-    @GetMapping("form/{id}")
-    public String updateForm(Model model, @PathVariable(name = "id") int id) {
+    @GetMapping("formularioclientes/{id}")
+    public String alterarCliente(Model model, @PathVariable(name = "id") int id) {
 
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid person Id:" + id));
@@ -52,29 +55,31 @@ public class ControllerCliente {
     }
 
     // Atualiza funcionario
-    @PostMapping("update/{id}")
-    public String alterarProduto(@Valid Cliente cliente, BindingResult result, @PathVariable int id) {
+    @PostMapping("updatecliente/{id}")
+    public String updateCliente(@Valid Cliente cliente, BindingResult result, @PathVariable int id) {
 
         if (result.hasErrors()) {
-            return "redirect:/form";
+            return "redirect:/formularioclientes";
         }
 
+        cliente.setUltimaalteracao(new Date());
+
         clienteRepository.save(cliente);
-        return "redirect:/inicio";
+        return "redirect:/historicoclientes";
     }
 
-    @GetMapping("delete/{id}")
-    public String delete(@PathVariable(name = "id") int id, Model model) {
+    @GetMapping("deletecliente/{id}")
+    public String deleteCliente(@PathVariable(name = "id") int id, Model model) {
 
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid person Id:" + id));
 
         clienteRepository.delete(cliente);
-        return "redirect:/inicio";
+        return "redirect:/historicoclientes";
     }
 
-    @GetMapping("/clientes")
-    public String historicoClientes(Model model) {
+    @GetMapping("/historicoclientes")
+    public String listarCliente(Model model) {
         List<Cliente> clientes = clienteRepository.findAll();
 
         model.addAttribute("clientes", clientes);

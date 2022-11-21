@@ -1,24 +1,21 @@
 package com.labs.br.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.text.DateFormat;
 import java.util.Date;
 
 @Entity
 @Setter @Getter @NoArgsConstructor @AllArgsConstructor
 public class Cliente {
 
-    public Cliente(String cpf, String nome, String rg, String uf_rg, String orgao_emissor, LocalDate data_nascimento, String genero, String email, String telefone, String telefone_secundario, String cep, String logradouro, String numero, String complemento, String bairro, String municipio, String uf) {
+    public Cliente(String cpf, String nome, String rg, String uf_rg, String orgao_emissor, Date data_nascimento, String genero, String email, String telefone, String telefone_secundario, String cep, String logradouro, String numero, String complemento, String bairro, String municipio, String uf, Date ultimaalteracao) {
         this.cpf = cpf;
         this.nome = nome;
         this.rg = rg;
@@ -36,6 +33,7 @@ public class Cliente {
         this.bairro = bairro;
         this.municipio = municipio;
         this.uf = uf;
+        this.ultimaalteracao = ultimaalteracao;
     }
 
     @Id
@@ -47,8 +45,8 @@ public class Cliente {
     private String rg;
     private String uf_rg;
     private String orgao_emissor;
-
-    private LocalDate data_nascimento;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date data_nascimento;
     private String genero;
     private String email;
     private String telefone;
@@ -60,5 +58,6 @@ public class Cliente {
     private String bairro;
     private String municipio;
     private String uf;
+    private  Date ultimaalteracao;
 
 }
