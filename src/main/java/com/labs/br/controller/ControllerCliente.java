@@ -40,7 +40,6 @@ public class ControllerCliente {
         cliente.setUltimaalteracao(new Date());
 
         clienteRepository.save(cliente);
-
         return "redirect:/historicoclientes";
     }
 
